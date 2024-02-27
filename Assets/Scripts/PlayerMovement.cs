@@ -92,9 +92,14 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKey(KeyCode.F))
         {
-            rb.velocity = Vector3.zero;
+            rb.drag = GroundDrag;
+            print("SALSA BEANS");
+        }
+        else
+        {
+            rb.drag = 0;
         }
     }
 
@@ -118,14 +123,14 @@ public class PlayerMovement : MonoBehaviour
             Mathf.Clamp(rb.velocity.y,  -TopYSpeed, TopYSpeed),
             Mathf.Clamp(rb.velocity.z, (-TopZSpeed), TopZSpeed));
 
-        if(MoveDirection.magnitude <= 0)
-        {
-            rb.drag = GroundDrag;
-        }
-        else
-        {
-            rb.drag = 0;
-        }
+        //if(MoveDirection.magnitude <= 0)
+        //{
+        //    rb.drag = GroundDrag;
+        //}
+        //else
+        //{
+        //    rb.drag = 0;
+        //}
     }
 
     //Jump Behaviour
