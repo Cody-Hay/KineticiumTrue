@@ -2866,7 +2866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 5
   WallRunSpeed: 7
-  GroundDrag: 1.2
+  GroundDrag: 1.75
   TopXSpeed: 20
   TopYSpeed: 15
   TopZSpeed: 18
