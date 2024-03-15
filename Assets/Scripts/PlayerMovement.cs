@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     float HorizontalInput;
     float VerticalInput;
 
+    public float DamageMultiplier;
+
     public Transform Orientation;
 
     Vector3 MoveDirection;
@@ -75,6 +77,17 @@ public class PlayerMovement : MonoBehaviour
         CurrentVelocity = rb.velocity.magnitude;
         var roundedVelocity = Mathf.Round(CurrentVelocity);
         Speedometer.text = roundedVelocity.ToString();
+
+        switch(roundedVelocity)
+        {
+            case <5:
+                DamageMultiplier = 0.25f;
+                break;
+                case 5:
+                DamageMultiplier = 1;
+                break;
+
+        }
     }
 
     private void FixedUpdate()

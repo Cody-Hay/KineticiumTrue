@@ -17,13 +17,13 @@ public class EnemyHealth : MonoBehaviour
     {
         if (HealthPoints <= 0f)
         {
-            HealthPoints = 0f;
-            Destroy(gameObject,2);
+            Destroy(gameObject);
         }
     }
 
     public void TakeDamage(float Damage)
     {
         HealthPoints -= Damage;
+        print(HealthPoints);
     }
 }
