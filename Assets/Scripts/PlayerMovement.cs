@@ -77,17 +77,7 @@ public class PlayerMovement : MonoBehaviour
         CurrentVelocity = rb.velocity.magnitude;
         var roundedVelocity = Mathf.Round(CurrentVelocity);
         Speedometer.text = roundedVelocity.ToString();
-
-        switch(roundedVelocity)
-        {
-            case <5:
-                DamageMultiplier = 0.25f;
-                break;
-                case 5:
-                DamageMultiplier = 1;
-                break;
-
-        }
+        DamageMultiplier = roundedVelocity * 0.25f;
     }
 
     private void FixedUpdate()

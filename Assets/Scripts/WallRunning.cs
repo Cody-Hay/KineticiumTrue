@@ -25,8 +25,6 @@ public class WallRunning : MonoBehaviour
     private float HorizontalInput;
     private float VerticalInput;
 
-
-
     [Header("Detection")]
     public float WallCheckDistance;
     public float MinJumpHeight;

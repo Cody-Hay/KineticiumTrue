@@ -9,6 +9,7 @@ public class PlayerGun : MonoBehaviour
     [Header("Shooting")]
 
     public float PlayerDamage;
+    public float BaseDamage;
     public float range;
     public float CurrentCooldown;
     public float WeaponCooldown;
@@ -23,12 +24,20 @@ public class PlayerGun : MonoBehaviour
     [Header("References")]
 
     public PlayerMovement playerMovement;
+
+    [Header("Gun Swapping")]
+
+    public bool HasBasicWeapon;
+    public bool HasSMG;
+    public bool HasSniper;
+    public bool HasSword;
  
 
     // Start is called before the first frame update
     void Start()
     {
         CurrentCooldown = WeaponCooldown;
+        playerMovement =this.GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -38,13 +47,11 @@ public class PlayerGun : MonoBehaviour
         {
             Shoot();
         }
-
-        PlayerDamage = PlayerDamage * playerMovement.DamageMultiplier;
-      //  CurrentCooldown = CurrentCooldown + Time.deltaTime;
-
+        PlayerDamage = (BaseDamage * playerMovement.DamageMultiplier);
+        CurrentCooldown = CurrentCooldown + Time.deltaTime;
     }
 
-
+    //Shoot function
     public void Shoot()
     {
         RaycastHit PlayerHit;
