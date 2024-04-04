@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class HealthScript : MonoBehaviour
@@ -17,6 +18,7 @@ public class HealthScript : MonoBehaviour
         if (HealthPoints <=0f)
         {
             HealthPoints = 0f;
+            SceneManager.LoadScene(0);
         }
 
         //Health Display
