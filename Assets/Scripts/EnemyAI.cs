@@ -77,13 +77,14 @@ public class EnemyAI : MonoBehaviour
             
 
             HealthScript healthScript = hit.transform.GetComponent<HealthScript>();
+            PlayerMovement Playermove = hit.transform.GetComponent<PlayerMovement>();
 
 
            if ((hit.transform.tag == "Player") &&(canFire))
            {
                 canFire = false;
                 print("WAADASHJDHAKFH");
-                healthScript.TakeDamage(Damage);
+                healthScript.TakeDamage(Mathf.Round(Damage/Playermove.DamageReduction));
                 TrailRenderer trail = Instantiate(BulletTrail,FirePoint.position, Quaternion.identity);
 
                 StartCoroutine(SpawnTrail(trail, hit));

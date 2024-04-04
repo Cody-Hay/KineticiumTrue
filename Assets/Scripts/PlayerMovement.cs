@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class PlayerMovement : MonoBehaviour
@@ -24,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     float VerticalInput;
 
     public float DamageMultiplier;
+
+    public float DamageReduction;
 
     public Transform Orientation;
 
@@ -78,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         var roundedVelocity = Mathf.Round(CurrentVelocity);
         Speedometer.text = roundedVelocity.ToString();
         DamageMultiplier = roundedVelocity * 0.25f;
+        DamageReduction = roundedVelocity / 5;
     }
 
     private void FixedUpdate()
@@ -98,7 +100,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.F))
         {
             rb.drag = GroundDrag;
-            print("SALSA BEANS");
         }
         else
         {

@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using TMPro;
 
 public class PlayerGun : MonoBehaviour
 {
@@ -20,6 +19,7 @@ public class PlayerGun : MonoBehaviour
     [Header("Camera")]
 
     public Camera cam;
+    public TMP_Text WeaponDisplay;
 
     [Header("References")]
 
@@ -30,12 +30,11 @@ public class PlayerGun : MonoBehaviour
     public bool HasBasicWeapon;
     public bool HasSMG;
     public bool HasSniper;
-    public bool HasSword;
- 
 
     // Start is called before the first frame update
     void Start()
     {
+        HasBasicWeapon = true;
         CurrentCooldown = WeaponCooldown;
         playerMovement =this.GetComponent<PlayerMovement>();
     }
@@ -43,12 +42,67 @@ public class PlayerGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var WholeVelocity = Mathf.Round(playerMovement.CurrentVelocity);
+        
+        
+        //Inputs
         if (Input.GetMouseButton(0))
         {
             Shoot();
         }
         PlayerDamage = (BaseDamage * playerMovement.DamageMultiplier);
         CurrentCooldown = CurrentCooldown + Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (WholeVelocity<=0)
+            {
+               HasBasicWeapon = true;
+               HasSMG = false;
+               HasSniper = false;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+           if(WholeVelocity <=0)
+           {
+              HasSMG = true;
+              HasSniper = false;
+              HasBasicWeapon = false;
+           }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if(WholeVelocity <=0)
+            {
+                HasSniper = true;
+                HasSMG = false;
+                HasBasicWeapon = false;
+            }
+        }
+        //Weapon Bools-Same object, different stats
+        if(HasSMG)
+        {
+            WeaponDisplay.text = "SMG";
+            WeaponCooldown = 0.2f;
+            BaseDamage = 3;
+        }
+
+        if(HasBasicWeapon)
+        {
+            WeaponDisplay.text = "Basic";
+            WeaponCooldown = 0.75f;
+            BaseDamage = 7;
+        }
+
+        if (HasSniper)
+        {
+            WeaponDisplay.text = "Sniper";
+            WeaponCooldown = 2.5f;
+            BaseDamage = 25;
+        }
     }
 
     //Shoot function
@@ -69,7 +123,6 @@ public class PlayerGun : MonoBehaviour
                      enemyHealth.TakeDamage(PlayerDamage);
                      TrailRenderer trail = Instantiate(BulletTrail, FirePoint.transform.position, Quaternion.identity);
                      StartCoroutine(SpawnTrail(trail, PlayerHit));
-                     print("PLAYA");
                 }
 
                 else
@@ -84,7 +137,7 @@ public class PlayerGun : MonoBehaviour
         }
     }
 
-
+    //Rendering code for the bullet trails
     private IEnumerator SpawnTrail(TrailRenderer Trail, RaycastHit Hit)
     {
         float time = 0;
@@ -94,7 +147,7 @@ public class PlayerGun : MonoBehaviour
         while (time < 1)
         {
             Trail.transform.position = Vector3.Lerp(StartPosition, Hit.point, time);
-            time += Time.deltaTime / Trail.time;
+            time += Trail.time;
 
             yield return null;
         }
