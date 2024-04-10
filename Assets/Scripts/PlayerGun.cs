@@ -131,8 +131,6 @@ public class PlayerGun : MonoBehaviour
                     TrailRenderer trail = Instantiate(BulletTrail, FirePoint.transform.position, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, PlayerHit));
                 }
-                
-                
             }
         }
     }

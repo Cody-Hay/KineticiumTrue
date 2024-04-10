@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -11,6 +8,10 @@ public class EnemyAI : MonoBehaviour
     public Transform Target;
     public float DetectionRange;
     public float RotationSpeed;
+
+    [Header("Pathfinding")]
+
+    public Vector3 Playerrange;
 
     [Header("Shooting")]
 
@@ -83,7 +84,6 @@ public class EnemyAI : MonoBehaviour
            if ((hit.transform.tag == "Player") &&(canFire))
            {
                 canFire = false;
-                print("WAADASHJDHAKFH");
                 healthScript.TakeDamage(Mathf.Round(Damage/Playermove.DamageReduction));
                 TrailRenderer trail = Instantiate(BulletTrail,FirePoint.position, Quaternion.identity);
 
