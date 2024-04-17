@@ -136,7 +136,6 @@ public class WallRunning : MonoBehaviour
     private void WallJump()
     {
         Vector3 wallNormal = WallRight ? RightWallHit.normal : LeftWallHit.normal;
-
         Vector3 forceToApply = transform.up * WallJumpUpForce * 5 + wallNormal * WallJumpSideForce * 5;
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);

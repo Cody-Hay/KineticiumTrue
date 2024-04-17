@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public float HealthPoints;
+    [SerializeField] private MeshRenderer HitShow;
 
     // Start is called before the first frame update
     void Start()
@@ -25,5 +26,16 @@ public class EnemyHealth : MonoBehaviour
     {
         HealthPoints -= Damage;
         print(HealthPoints);
+        StartCoroutine(DamageFlash());
+    }
+
+
+    IEnumerator DamageFlash()
+    {
+        HitShow.material.color = Color.white;
+
+        yield return new WaitForSeconds(0.15f);
+
+        HitShow.material.color = Color.red;
     }
 }
