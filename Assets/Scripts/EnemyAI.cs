@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -11,6 +9,12 @@ public class EnemyAI : MonoBehaviour
     public Transform Target;
     public float DetectionRange;
     public float RotationSpeed;
+
+    [Header("Pathfinding")]
+
+    public Vector3 Playerrange;
+    public NavMeshAgent EnemyAgent;
+    public float Chaserange;
 
     [Header("Shooting")]
 
@@ -26,7 +30,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        EnemyAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -46,6 +50,11 @@ public class EnemyAI : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(NewDirection);
 
             Shooting();
+        }
+
+        if(Vector3.Distance(Target.position, transform.position) < Chaserange)
+        {
+            EnemyAgent.SetDestination(Target.position);
         }
         else
         {
@@ -83,7 +92,6 @@ public class EnemyAI : MonoBehaviour
            if ((hit.transform.tag == "Player") &&(canFire))
            {
                 canFire = false;
-                print("WAADASHJDHAKFH");
                 healthScript.TakeDamage(Mathf.Round(Damage/Playermove.DamageReduction));
                 TrailRenderer trail = Instantiate(BulletTrail,FirePoint.position, Quaternion.identity);
 
