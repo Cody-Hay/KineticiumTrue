@@ -15,6 +15,7 @@ public class PlayerGun : MonoBehaviour
 
     public Transform FirePoint;
     public TrailRenderer BulletTrail;
+    [SerializeField] private GameObject BulletHoleDecal;
 
     [Header("Camera")]
 
@@ -24,6 +25,7 @@ public class PlayerGun : MonoBehaviour
     [Header("References")]
 
     public PlayerMovement playerMovement;
+    [SerializeField] private MeshRenderer GunMesh;
 
     [Header("Gun Swapping")]
 
@@ -60,6 +62,7 @@ public class PlayerGun : MonoBehaviour
                HasBasicWeapon = true;
                HasSMG = false;
                HasSniper = false;
+               GunMesh.material.color = Color.black;
             }
         }
 
@@ -70,6 +73,8 @@ public class PlayerGun : MonoBehaviour
               HasSMG = true;
               HasSniper = false;
               HasBasicWeapon = false;
+              GunMesh.material.color = Color.yellow;
+
            }
         }
 
@@ -80,6 +85,7 @@ public class PlayerGun : MonoBehaviour
                 HasSniper = true;
                 HasSMG = false;
                 HasBasicWeapon = false;
+                GunMesh.material.color = Color.green;
             }
         }
         //Weapon Bools-Same object, different stats
@@ -130,6 +136,8 @@ public class PlayerGun : MonoBehaviour
                     CurrentCooldown = 0;
                     TrailRenderer trail = Instantiate(BulletTrail, FirePoint.transform.position, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, PlayerHit));
+                    GameObject obj = Instantiate(BulletHoleDecal, PlayerHit.point, Quaternion.identity, PlayerHit.transform);
+                    obj.transform.rotation = Quaternion.LookRotation(PlayerHit.normal);
                 }
             }
         }
