@@ -140,15 +140,4 @@ public class WallRunning : MonoBehaviour
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply, ForceMode.Force);
-    }
-
-    private void OnDrawGizmos()
-    {
-        WallRight = Physics.Raycast(transform.position, orientation.right, out RightWallHit, WallCheckDistance, WhatIsWall);
-        WallLeft = Physics.Raycast(transform.position, -orientation.right, out LeftWallHit, WallCheckDistance, WhatIsWall);
-
-        Gizmos.DrawRay(transform.position, orientation.right);
-        Gizmos.DrawRay(transform.position, -orientation.right);
-        Gizmos.color = Color.yellow;
-    }
 }
