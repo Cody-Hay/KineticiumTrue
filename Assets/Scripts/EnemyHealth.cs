@@ -22,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    //Damage method
     public void TakeDamage(float Damage)
     {
         HealthPoints -= Damage;
@@ -29,7 +30,7 @@ public class EnemyHealth : MonoBehaviour
         StartCoroutine(DamageFlash());
     }
 
-
+    //Damage flash Coroutine
     IEnumerator DamageFlash()
     {
         HitShow.material.color = Color.white;

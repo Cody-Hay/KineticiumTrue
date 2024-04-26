@@ -10,6 +10,7 @@ public class PlayerGun : MonoBehaviour
     public float PlayerDamage;
     public float BaseDamage;
     public float range;
+    public float FalloffRange;
     public float CurrentCooldown;
     public float WeaponCooldown;
 
@@ -94,6 +95,7 @@ public class PlayerGun : MonoBehaviour
             WeaponDisplay.text = "SMG";
             WeaponCooldown = 0.2f;
             BaseDamage = 3;
+            FalloffRange = 20;
         }
 
         if(HasBasicWeapon)
@@ -101,6 +103,7 @@ public class PlayerGun : MonoBehaviour
             WeaponDisplay.text = "Basic";
             WeaponCooldown = 0.75f;
             BaseDamage = 7;
+            FalloffRange = 40;
         }
 
         if (HasSniper)
@@ -108,6 +111,7 @@ public class PlayerGun : MonoBehaviour
             WeaponDisplay.text = "Sniper";
             WeaponCooldown = 2.5f;
             BaseDamage = 25;
+            FalloffRange = 120;
         }
     }
 
@@ -125,10 +129,18 @@ public class PlayerGun : MonoBehaviour
             {
                 if (PlayerHit.transform.tag == "Enemy")
                 {
-                     CurrentCooldown = 0;
-                     enemyHealth.TakeDamage(PlayerDamage);
-                     TrailRenderer trail = Instantiate(BulletTrail, FirePoint.transform.position, Quaternion.identity);
-                     StartCoroutine(SpawnTrail(trail, PlayerHit));
+                    CurrentCooldown = 0;
+                    TrailRenderer trail = Instantiate(BulletTrail, FirePoint.transform.position, Quaternion.identity);
+                    StartCoroutine(SpawnTrail(trail, PlayerHit));
+
+                    if(Vector3.Distance(transform.position, PlayerHit.transform.position)>FalloffRange)
+                    {
+                         enemyHealth.TakeDamage(PlayerDamage/5);
+                    }
+                    else
+                    {
+                        enemyHealth.TakeDamage(PlayerDamage);
+                    }
                 }
 
                 else

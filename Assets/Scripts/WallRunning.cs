@@ -61,6 +61,7 @@ public class WallRunning : MonoBehaviour
         }
     }
 
+    //Wallrun check
     private void CheckForWall()
     {
         WallRight = Physics.Raycast(transform.position, orientation.right, out RightWallHit, WallCheckDistance, WhatIsWall);
@@ -71,7 +72,6 @@ public class WallRunning : MonoBehaviour
     {
         HorizontalInput = Input.GetAxisRaw("Horizontal");
         VerticalInput = Input.GetAxisRaw("Vertical");
-
 
         if((WallLeft || WallRight) && VerticalInput > 0 && playerMovement.IsGrounded == false)
         {
@@ -100,6 +100,7 @@ public class WallRunning : MonoBehaviour
         WallusRunnus =true;
     }
 
+    //Method for during wallrunning
     private void IsWallRunning()
     {
         rb.useGravity = false;
@@ -133,6 +134,7 @@ public class WallRunning : MonoBehaviour
         WallusRunnus = false;
     }
 
+    //Wall jump method
     private void WallJump()
     {
         Vector3 wallNormal = WallRight ? RightWallHit.normal : LeftWallHit.normal;
