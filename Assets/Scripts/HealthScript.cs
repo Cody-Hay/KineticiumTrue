@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour
 {
     public float HealthPoints;
     public TMP_Text HealthTracker;
+    public Slider HealthSlider;
 
     void Start()
     {
@@ -23,6 +25,7 @@ public class HealthScript : MonoBehaviour
 
         //Health Display
         HealthTracker.text = HealthPoints.ToString();
+        HealthSlider.value = HealthPoints/100;
     }
 
     //Trigger the damage

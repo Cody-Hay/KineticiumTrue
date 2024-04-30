@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -46,8 +45,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("UI Elements")]
 
     public TMP_Text Speedometer;
+    public Slider SpeedSlider;
     public float CurrentVelocity;
 
+    public CameraControls _cameraControls;
+
+    public float roundedVelocity;
 
     public enum CharacterStates
     {
@@ -76,10 +79,13 @@ public class PlayerMovement : MonoBehaviour
 
         //Speedometer
         CurrentVelocity = rb.velocity.magnitude;
-        var roundedVelocity = Mathf.Round(CurrentVelocity);
+        roundedVelocity = Mathf.Round(CurrentVelocity);
         Speedometer.text = roundedVelocity.ToString();
+        SpeedSlider.value = roundedVelocity / 30;
         DamageMultiplier = roundedVelocity * 0.25f;
         DamageReduction = roundedVelocity / 5;
+        SpeedToFOV(roundedVelocity);
+
     }
 
     private void FixedUpdate()
@@ -126,15 +132,6 @@ public class PlayerMovement : MonoBehaviour
             Mathf.Clamp(rb.velocity.x, (-TopXSpeed), TopXSpeed),
             Mathf.Clamp(rb.velocity.y,  -TopYSpeed, TopYSpeed),
             Mathf.Clamp(rb.velocity.z, (-TopZSpeed), TopZSpeed));
-
-        //if(MoveDirection.magnitude <= 0)
-        //{
-        //    rb.drag = GroundDrag;
-        //}
-        //else
-        //{
-        //    rb.drag = 0;
-        //}
     }
 
     //Jump Behaviour
@@ -143,5 +140,13 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3 (rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
+    }
+
+    private void SpeedToFOV(float playerspeed)
+    {
+        
+       float DividedSpeed = playerspeed / 27 + 0.1f;
+        float desiredFOV = DividedSpeed * 80;
+        _cameraControls.FOVChange(desiredFOV);
     }
 }

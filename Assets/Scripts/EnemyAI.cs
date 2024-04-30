@@ -36,9 +36,7 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Look Rotation
-
-
+        //Shooting check and looking towards player
         if (Vector3.Distance(Target.position, transform.position) < DetectionRange)
         {
             Vector3 TargetDirection = Target.position - transform.position;
@@ -52,6 +50,7 @@ public class EnemyAI : MonoBehaviour
             Shooting();
         }
 
+        //Chase player check
         if(Vector3.Distance(Target.position, transform.position) < Chaserange)
         {
             EnemyAgent.SetDestination(Target.position);
@@ -69,13 +68,9 @@ public class EnemyAI : MonoBehaviour
         }
         canFire = true;
         currentCoolDown = cooldown;
-
-       
-
-        //Shooting Raycast
-
     }
 
+    //Shoot Method
     public void Shooting()
     {
         RaycastHit hit;
@@ -100,6 +95,7 @@ public class EnemyAI : MonoBehaviour
        }
     }
 
+    //Trail Rendering coroutine
     private IEnumerator SpawnTrail(TrailRenderer Trail, RaycastHit Hit)
     {
         float time = 0;
