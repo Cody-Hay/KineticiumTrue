@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraControls : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CameraControls : MonoBehaviour
     public float SenseY;
 
     public Transform Orientation;
+    public Transform CamHolder;
     public Camera Camera;
 
     float xRotation;
@@ -34,21 +36,20 @@ public class CameraControls : MonoBehaviour
         yRotation += mouseX;
         xRotation -= mouseY;
 
-        
-        
-
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        CamHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         Orientation.rotation = Quaternion.Euler(0, yRotation,0);
-        
     }
     public void FOVChange(float dFOV )
     {
-
         FOV = Mathf.Lerp(Camera.fieldOfView, dFOV, Time.deltaTime * FovChangeSpeed);
 
         Camera.fieldOfView = FOV;
+    }
 
+    public void FOVTilt(float ZTilt)
+    {
+        transform.DOLocalRotate(new Vector3(0, 0, ZTilt), 0.25f);
     }
 }

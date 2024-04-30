@@ -37,6 +37,7 @@ public class WallRunning : MonoBehaviour
     private PlayerMovement playerMovement;
     public Transform orientation;
     private Rigidbody rb;
+    public CameraControls CameraControls;
 
   
     void Start()
@@ -126,12 +127,23 @@ public class WallRunning : MonoBehaviour
         {
             rb.AddForce(-WallNormal * 100, ForceMode.Force);
         }
+
+        if(WallLeft&& !WallRight)
+        {
+            CameraControls.FOVTilt(-5f);
+        }
+
+        if(!WallLeft&& WallRight)
+        {
+            CameraControls.FOVTilt(5f);
+        }
     }
 
     private void EndWallRun()
     {
         rb.useGravity = true;
         WallusRunnus = false;
+        CameraControls.FOVTilt(0f);
     }
 
     //Wall jump method

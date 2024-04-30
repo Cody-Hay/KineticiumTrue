@@ -92,7 +92,7 @@ public class PlayerGun : MonoBehaviour
         //Weapon Bools-Same object, different stats
         if(HasSMG)
         {
-            WeaponDisplay.text = "SMG";
+            WeaponDisplay.text = "Rapid-Fire";
             WeaponCooldown = 0.2f;
             BaseDamage = 3;
             FalloffRange = 20;
@@ -100,7 +100,7 @@ public class PlayerGun : MonoBehaviour
 
         if(HasBasicWeapon)
         {
-            WeaponDisplay.text = "Basic";
+            WeaponDisplay.text = "Standard";
             WeaponCooldown = 0.75f;
             BaseDamage = 7;
             FalloffRange = 40;
@@ -108,7 +108,7 @@ public class PlayerGun : MonoBehaviour
 
         if (HasSniper)
         {
-            WeaponDisplay.text = "Sniper";
+            WeaponDisplay.text = "Long-Range";
             WeaponCooldown = 2.5f;
             BaseDamage = 25;
             FalloffRange = 120;
