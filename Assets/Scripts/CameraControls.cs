@@ -39,13 +39,15 @@ public class CameraControls : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         CamHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        Orientation.rotation = Quaternion.Euler(0, yRotation,0);
-    }
-    public void FOVChange(float dFOV )
-    {
-        FOV = Mathf.Lerp(Camera.fieldOfView, dFOV, Time.deltaTime * FovChangeSpeed);
+        Orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
-        Camera.fieldOfView = FOV;
+    }
+    public void FOVChange(float dFOV)
+    {
+            FOV = Mathf.Lerp(Camera.fieldOfView, dFOV, Time.deltaTime * FovChangeSpeed);
+
+            Camera.fieldOfView = FOV;
+            print(dFOV.ToString());
     }
 
     public void FOVTilt(float ZTilt)
