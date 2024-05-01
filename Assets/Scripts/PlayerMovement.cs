@@ -85,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
         DamageMultiplier = roundedVelocity * 0.25f;
         DamageReduction = roundedVelocity / 5;
         SpeedToFOV(roundedVelocity);
-
     }
 
     private void FixedUpdate()
@@ -144,7 +143,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void SpeedToFOV(float playerspeed)
     {
-        
        float DividedSpeed = playerspeed / 27 + 0.1f;
         float desiredFOV = DividedSpeed * 80;
         _cameraControls.FOVChange(desiredFOV);
