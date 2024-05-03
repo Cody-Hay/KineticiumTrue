@@ -84,7 +84,29 @@ public class PlayerMovement : MonoBehaviour
         SpeedSlider.value = roundedVelocity / 30;
         DamageMultiplier = roundedVelocity * 0.25f;
         DamageReduction = roundedVelocity / 5;
-        SpeedToFOV(roundedVelocity);
+        // SpeedToFOV(roundedVelocity);
+
+        switch(roundedVelocity)
+        {
+            case <5:
+                _cameraControls.FOV = 60;
+                break;
+            case <10:
+                _cameraControls.FOV = 66;
+                break;
+            case <15:
+                _cameraControls.FOV = 72;
+                break;
+            case <20:
+                _cameraControls.FOV = 78;
+                break;
+            case <25:
+                _cameraControls.FOV = 84;
+                break;
+            case <30:
+                _cameraControls.FOV = 90;
+                break;
+        }
     }
 
     private void FixedUpdate()
@@ -141,10 +163,10 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
     }
 
-    private void SpeedToFOV(float playerspeed)
-    {
-       float DividedSpeed = playerspeed / 27 + 0.1f;
-        float desiredFOV = DividedSpeed * 80;
-        _cameraControls.FOVChange(desiredFOV);
-    }
+    //private void SpeedToFOV(float playerspeed)
+    //{
+    //   float DividedSpeed = playerspeed / 27 + 0.1f;
+    //    float desiredFOV = DividedSpeed * 80;
+    //    _cameraControls.FOVChange(desiredFOV);
+    //}
 }

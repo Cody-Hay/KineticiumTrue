@@ -29,7 +29,6 @@ public class CameraControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FOVChange(100);
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * SenseX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * SenseY;
 
@@ -41,17 +40,11 @@ public class CameraControls : MonoBehaviour
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         Orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
-    }
-    public void FOVChange(float dFOV)
-    {
-            FOV = Mathf.Lerp(Camera.fieldOfView, dFOV, Time.deltaTime * FovChangeSpeed);
-
-            Camera.fieldOfView = FOV;
-            print(dFOV.ToString());
+        Camera.fieldOfView = FOV;
     }
 
     public void FOVTilt(float ZTilt)
     {
-        transform.DOLocalRotate(new Vector3(0, 0, ZTilt), 0.25f);
+        transform.DOLocalRotate(new Vector3(0, yRotation, ZTilt), 0.25f);
     }
 }

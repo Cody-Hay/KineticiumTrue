@@ -128,12 +128,12 @@ public class WallRunning : MonoBehaviour
             rb.AddForce(-WallNormal * 100, ForceMode.Force);
         }
 
-        if(WallLeft&& !WallRight)
+        if(WallLeft)
         {
             CameraControls.FOVTilt(-5f);
         }
 
-        if(!WallLeft&& WallRight)
+        if(WallRight)
         {
             CameraControls.FOVTilt(5f);
         }
@@ -154,5 +154,14 @@ public class WallRunning : MonoBehaviour
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply, ForceMode.Force);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, -orientation.right);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(transform.position, orientation.right);
+        Gizmos.color = Color.magenta;
+
     }
 }
