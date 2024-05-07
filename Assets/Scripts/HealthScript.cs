@@ -11,7 +11,7 @@ public class HealthScript : MonoBehaviour
 
     void Start()
     {
-        
+        Scene CurrentScene = SceneManager.GetActiveScene();
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class HealthScript : MonoBehaviour
         if (HealthPoints <=0f)
         {
             HealthPoints = 0f;
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         //Health Display
