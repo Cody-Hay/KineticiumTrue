@@ -16,14 +16,18 @@ public class CameraControls : MonoBehaviour
     float xRotation;
     float yRotation;
 
-    public float FOV;
+    public float HighFOV;
+    public float LowFOV;
+    public float PeakFOV;
     [SerializeField] private float FovChangeSpeed;
+
+    public bool Highspeed;
+    public bool PeakSpeed;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        FOV = 60f;
     }
 
     // Update is called once per frame
@@ -40,7 +44,21 @@ public class CameraControls : MonoBehaviour
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         Orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
-        Camera.fieldOfView = FOV;
+        if (Highspeed&!PeakSpeed)
+        {
+            Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, HighFOV, FovChangeSpeed);
+        }
+
+        if (PeakSpeed & !Highspeed)
+        {
+            Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, PeakFOV, FovChangeSpeed);
+        }
+
+        if(!Highspeed&!PeakSpeed)
+        {
+            Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, LowFOV, FovChangeSpeed);
+        }
+
     }
 
     public void FOVTilt(float ZTilt)
