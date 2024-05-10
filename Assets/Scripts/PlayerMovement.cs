@@ -84,7 +84,22 @@ public class PlayerMovement : MonoBehaviour
         SpeedSlider.value = roundedVelocity / 30;
         DamageMultiplier = roundedVelocity * 0.25f;
         DamageReduction = roundedVelocity / 5;
-        SpeedToFOV(roundedVelocity);
+
+        if(roundedVelocity >= 10)
+        {
+            _cameraControls.Highspeed = true;
+            _cameraControls.PeakSpeed = false;
+        }
+        if(roundedVelocity<10)
+        {
+            _cameraControls.Highspeed = false;
+            _cameraControls.PeakSpeed = false;
+        }
+        if (roundedVelocity >= 17)
+        {
+            _cameraControls.Highspeed = false;
+            _cameraControls.PeakSpeed = true;
+        }
     }
 
     private void FixedUpdate()
@@ -139,12 +154,5 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3 (rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
-    }
-
-    private void SpeedToFOV(float playerspeed)
-    {
-       float DividedSpeed = playerspeed / 27 + 0.1f;
-        float desiredFOV = DividedSpeed * 80;
-        _cameraControls.FOVChange(desiredFOV);
     }
 }

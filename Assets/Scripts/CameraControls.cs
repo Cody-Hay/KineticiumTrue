@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class CameraControls : MonoBehaviour
 {
@@ -16,20 +17,23 @@ public class CameraControls : MonoBehaviour
     float xRotation;
     float yRotation;
 
-    public float FOV;
+    public float HighFOV;
+    public float LowFOV;
+    public float PeakFOV;
     [SerializeField] private float FovChangeSpeed;
+
+    public bool Highspeed;
+    public bool PeakSpeed;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        FOV = 60f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        FOVChange(100);
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * SenseX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * SenseY;
 
@@ -38,20 +42,33 @@ public class CameraControls : MonoBehaviour
 
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        CamHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         Orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
-    }
-    public void FOVChange(float dFOV)
-    {
-            FOV = Mathf.Lerp(Camera.fieldOfView, dFOV, Time.deltaTime * FovChangeSpeed);
+        if (Highspeed&!PeakSpeed)
+        {
+            Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, HighFOV, FovChangeSpeed);
+        }
 
-            Camera.fieldOfView = FOV;
-            print(dFOV.ToString());
+        if (PeakSpeed & !Highspeed)
+        {
+            Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, PeakFOV, FovChangeSpeed);
+        }
+
+        if(!Highspeed&!PeakSpeed)
+        {
+            Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, LowFOV, FovChangeSpeed);
+        }
+
     }
 
     public void FOVTilt(float ZTilt)
     {
-        transform.DOLocalRotate(new Vector3(0, 0, ZTilt), 0.25f);
+        transform.DOLocalRotate(new Vector3(0, yRotation, ZTilt), 0.25f);
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.Clear(true);
     }
 }

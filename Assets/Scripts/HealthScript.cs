@@ -11,7 +11,7 @@ public class HealthScript : MonoBehaviour
 
     void Start()
     {
-
+        Scene CurrentScene = SceneManager.GetActiveScene();
     }
 
     // Update is called once per frame
