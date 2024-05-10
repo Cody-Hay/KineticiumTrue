@@ -26,7 +26,6 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(float Damage)
     {
         HealthPoints -= Damage;
-        print(HealthPoints);
         StartCoroutine(DamageFlash());
     }
 

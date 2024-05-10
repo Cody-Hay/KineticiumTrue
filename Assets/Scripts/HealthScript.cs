@@ -20,7 +20,7 @@ public class HealthScript : MonoBehaviour
         if (HealthPoints <=0f)
         {
             HealthPoints = 0f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(0);
         }
 
         //Health Display

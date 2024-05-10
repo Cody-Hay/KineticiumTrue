@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class CameraControls : MonoBehaviour
 {
@@ -64,5 +65,10 @@ public class CameraControls : MonoBehaviour
     public void FOVTilt(float ZTilt)
     {
         transform.DOLocalRotate(new Vector3(0, yRotation, ZTilt), 0.25f);
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.Clear(true);
     }
 }

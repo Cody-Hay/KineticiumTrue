@@ -2,14 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class LevelTransition : MonoBehaviour
 {
     public int SceneNumber;
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        print("SASAMI");
         SceneManager.LoadScene(SceneNumber);
     }
+
+
+    public void OnLevel2()
+    {
+        SceneManager.LoadScene("Level 2");
+    }
+    public void OnLevel3()
+    {
+        SceneManager.LoadScene("Level 3");
+    }
 }
+
+
