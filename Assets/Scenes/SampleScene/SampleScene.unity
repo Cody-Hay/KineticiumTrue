@@ -2024,7 +2024,7 @@ PrefabInstance:
     - target: {fileID: 4095046360077531917, guid: 7d7b897b3b3a43c4596e67d133dbce59,
         type: 3}
       propertyPath: FovChangeSpeed
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5531151489030850648, guid: 7d7b897b3b3a43c4596e67d133dbce59,
         type: 3}
