@@ -25,12 +25,21 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float Damage;
     [SerializeField] private TrailRenderer BulletTrail;
 
+    [Header("Sounds")]
+    public AudioSource EnemySource;
+    public AudioClip EGunshot;
+    public AudioClip Alert;
+
+    private bool Alerted;
+    public bool StopRepeat;
 
 
     // Start is called before the first frame update
     void Start()
     {
         EnemyAgent = GetComponent<NavMeshAgent>();
+        EnemySource = GetComponent<AudioSource>();
+        StopRepeat= false;
     }
 
     // Update is called once per frame
@@ -46,7 +55,6 @@ public class EnemyAI : MonoBehaviour
             Vector3 NewDirection = Vector3.RotateTowards(transform.forward, TargetDirection, SingleStep, 0.0f);
             //NewDirection.y = 0; this will lock the y axis rotation.
             transform.rotation = Quaternion.LookRotation(NewDirection);
-
             Shooting();
         }
 
@@ -54,6 +62,7 @@ public class EnemyAI : MonoBehaviour
         if(Vector3.Distance(Target.position, transform.position) < Chaserange)
         {
             EnemyAgent.SetDestination(Target.position);
+            Alerted = true;
         }
         else
         {
@@ -68,6 +77,15 @@ public class EnemyAI : MonoBehaviour
         }
         canFire = true;
         currentCoolDown = cooldown;
+        if(Alerted&!StopRepeat)
+        {
+            EnemySource.PlayOneShot(Alert);
+            StopRepeat = true;
+        }
+        else
+        {
+            return;
+        }
     }
 
     //Shoot Method
@@ -91,6 +109,8 @@ public class EnemyAI : MonoBehaviour
                 TrailRenderer trail = Instantiate(BulletTrail,FirePoint.position, Quaternion.identity);
 
                 StartCoroutine(SpawnTrail(trail, hit));
+
+                EnemySource.PlayOneShot(EGunshot);
            }
        }
     }

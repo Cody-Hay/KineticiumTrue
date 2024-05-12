@@ -38,12 +38,18 @@ public class PlayerGun : MonoBehaviour
     public bool HasSMG;
     public bool HasSniper;
 
+    [Header("Sounds")]
+
+    public AudioSource ASource;
+    public AudioClip Gunshot;
+
     // Start is called before the first frame update
     void Start()
     {
         HasBasicWeapon = true;
         CurrentCooldown = WeaponCooldown;
         playerMovement = this.GetComponent<PlayerMovement>();
+        ASource= this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -169,7 +175,9 @@ public class PlayerGun : MonoBehaviour
                     StartCoroutine(SpawnTrail(trail, PlayerHit));
                     GameObject obj = Instantiate(BulletHoleDecal, PlayerHit.point, Quaternion.identity, PlayerHit.transform);
                     obj.transform.rotation = Quaternion.LookRotation(PlayerHit.normal);
+                    ASource.PlayOneShot(Gunshot);
                 }
+
             }
         }
     }

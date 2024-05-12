@@ -111,8 +111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -296, y: -202.1}
-  m_SizeDelta: {x: 200, y: 37.5764}
+  m_AnchoredPosition: {x: -241.45135, y: -207.5}
+  m_SizeDelta: {x: 309.0973, y: 37.5764}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &354613577156306937
 CanvasRenderer:
@@ -144,8 +144,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0b4c56bb7b4b9644d9dd6653f24dca4e, type: 2}
+  m_sharedMaterial: {fileID: 7839668381679533217, guid: 0b4c56bb7b4b9644d9dd6653f24dca4e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -169,15 +170,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -245,9 +246,9 @@ RectTransform:
   - {fileID: 6228659373454582823}
   - {fileID: 4491763281608111390}
   - {fileID: 1096405974014824315}
-  - {fileID: 1891123889246736804}
+  - {fileID: 5758819788877815756}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -349,6 +350,23 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FillClockwise
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736187454969087340, guid: 472a12da24bd667458d521ba3499196b,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b4c56bb7b4b9644d9dd6653f24dca4e,
+        type: 2}
+    - target: {fileID: 1736187454969087340, guid: 472a12da24bd667458d521ba3499196b,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7839668381679533217, guid: 0b4c56bb7b4b9644d9dd6653f24dca4e,
+        type: 2}
+    - target: {fileID: 1736187454969087340, guid: 472a12da24bd667458d521ba3499196b,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3788119078853315923, guid: 472a12da24bd667458d521ba3499196b,
         type: 3}
@@ -480,7 +498,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 472a12da24bd667458d521ba3499196b, type: 3}
---- !u!224 &1891123889246736804 stripped
+--- !u!224 &5758819788877815756 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6185112714931850863, guid: 472a12da24bd667458d521ba3499196b,
     type: 3}
@@ -494,6 +512,28 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5709627463145987338}
     m_Modifications:
+    - target: {fileID: 1736187454969087340, guid: 472a12da24bd667458d521ba3499196b,
+        type: 3}
+      propertyPath: m_text
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736187454969087340, guid: 472a12da24bd667458d521ba3499196b,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b4c56bb7b4b9644d9dd6653f24dca4e,
+        type: 2}
+    - target: {fileID: 1736187454969087340, guid: 472a12da24bd667458d521ba3499196b,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7839668381679533217, guid: 0b4c56bb7b4b9644d9dd6653f24dca4e,
+        type: 2}
+    - target: {fileID: 1736187454969087340, guid: 472a12da24bd667458d521ba3499196b,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3788119078853315923, guid: 472a12da24bd667458d521ba3499196b,
         type: 3}
       propertyPath: m_Name
