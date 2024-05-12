@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerGun : MonoBehaviour
 {
@@ -13,10 +14,12 @@ public class PlayerGun : MonoBehaviour
     public float FalloffRange;
     public float CurrentCooldown;
     public float WeaponCooldown;
+    public float WeaponRecoil;
 
     public Transform FirePoint;
     public TrailRenderer BulletTrail;
     [SerializeField] private GameObject BulletHoleDecal;
+    [SerializeField] private Image Crosshair;
 
     [Header("Camera")]
 
@@ -26,6 +29,7 @@ public class PlayerGun : MonoBehaviour
     [Header("References")]
 
     public PlayerMovement playerMovement;
+    public CameraControls camControls;
     [SerializeField] private MeshRenderer GunMesh;
 
     [Header("Gun Swapping")]
@@ -34,12 +38,18 @@ public class PlayerGun : MonoBehaviour
     public bool HasSMG;
     public bool HasSniper;
 
+    [Header("Sounds")]
+
+    public AudioSource ASource;
+    public AudioClip Gunshot;
+
     // Start is called before the first frame update
     void Start()
     {
         HasBasicWeapon = true;
         CurrentCooldown = WeaponCooldown;
-        playerMovement =this.GetComponent<PlayerMovement>();
+        playerMovement = this.GetComponent<PlayerMovement>();
+        ASource= this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -96,6 +106,8 @@ public class PlayerGun : MonoBehaviour
             WeaponCooldown = 0.2f;
             BaseDamage = 3;
             FalloffRange = 20;
+            WeaponRecoil = 0.25f;
+            camControls.ADSFOV = 45;
         }
 
         if(HasBasicWeapon)
@@ -104,6 +116,8 @@ public class PlayerGun : MonoBehaviour
             WeaponCooldown = 0.75f;
             BaseDamage = 7;
             FalloffRange = 40;
+            WeaponRecoil = 3;
+            camControls.ADSFOV = 33;
         }
 
         if (HasSniper)
@@ -112,6 +126,17 @@ public class PlayerGun : MonoBehaviour
             WeaponCooldown = 2.5f;
             BaseDamage = 25;
             FalloffRange = 120;
+            WeaponRecoil = 7;
+            camControls.ADSFOV = 25;
+        }
+
+        if(CurrentCooldown>WeaponCooldown)
+        {
+            Crosshair.color = Color.white;
+        }
+        else
+        {
+            Crosshair.color = Color.red;
         }
     }
 
@@ -150,7 +175,9 @@ public class PlayerGun : MonoBehaviour
                     StartCoroutine(SpawnTrail(trail, PlayerHit));
                     GameObject obj = Instantiate(BulletHoleDecal, PlayerHit.point, Quaternion.identity, PlayerHit.transform);
                     obj.transform.rotation = Quaternion.LookRotation(PlayerHit.normal);
+                    ASource.PlayOneShot(Gunshot);
                 }
+
             }
         }
     }

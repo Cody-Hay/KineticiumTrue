@@ -20,7 +20,10 @@ public class CameraControls : MonoBehaviour
     public float HighFOV;
     public float LowFOV;
     public float PeakFOV;
+    public float ADSFOV;
     [SerializeField] private float FovChangeSpeed;
+
+    private bool IsADS;
 
     public bool Highspeed;
     public bool PeakSpeed;
@@ -44,7 +47,8 @@ public class CameraControls : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         Orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-
+        
+        //FOV Parameters
         if (Highspeed&!PeakSpeed)
         {
             Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, HighFOV, FovChangeSpeed);
@@ -60,13 +64,33 @@ public class CameraControls : MonoBehaviour
             Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, LowFOV, FovChangeSpeed);
         }
 
+        //ADS parameters
+        if (Input.GetMouseButton((1)))
+        {
+            IsADS= true;
+        }
+        else
+        {
+            IsADS = false;
+        }
+
+        if(IsADS)
+        {
+            Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView,ADSFOV, FovChangeSpeed);
+        }
+        else
+        {
+            return;
+        }
     }
 
+    //Camera tilt when Wall running
     public void FOVTilt(float ZTilt)
     {
         transform.DOLocalRotate(new Vector3(0, yRotation, ZTilt), 0.25f);
     }
 
+    //removes DOTWeen between scenes
     private void OnDestroy()
     {
         DOTween.Clear(true);
