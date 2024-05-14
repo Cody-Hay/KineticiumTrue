@@ -105,7 +105,7 @@ public class PlayerGun : MonoBehaviour
             WeaponDisplay.text = "Rapid-Fire";
             WeaponCooldown = 0.2f;
             BaseDamage = 3;
-            FalloffRange = 20;
+            FalloffRange = 40;
             WeaponRecoil = 0.25f;
             camControls.ADSFOV = 45;
         }
@@ -114,8 +114,8 @@ public class PlayerGun : MonoBehaviour
         {
             WeaponDisplay.text = "Standard";
             WeaponCooldown = 0.75f;
-            BaseDamage = 7;
-            FalloffRange = 40;
+            BaseDamage = 10;
+            FalloffRange = 75;
             WeaponRecoil = 3;
             camControls.ADSFOV = 33;
         }

@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public float HealthPoints;
     [SerializeField] private MeshRenderer HitShow;
+    public LevelTransition levelTransition;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (HealthPoints <= 0f)
         {
+            levelTransition.EnemyDown();
             Destroy(gameObject);
         }
     }
