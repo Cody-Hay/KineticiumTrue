@@ -103,36 +103,50 @@ public class PlayerGun : MonoBehaviour
         if(HasSMG)
         {
             WeaponDisplay.text = "Rapid-Fire";
+            WeaponDisplay.color = Color.yellow;
             WeaponCooldown = 0.2f;
             BaseDamage = 3;
             FalloffRange = 40;
             WeaponRecoil = 0.25f;
-            camControls.ADSFOV = 45;
+            camControls.ADSFOV = 33;
         }
 
         if(HasBasicWeapon)
         {
             WeaponDisplay.text = "Standard";
+            WeaponDisplay.color = Color.white;
             WeaponCooldown = 0.75f;
             BaseDamage = 10;
             FalloffRange = 75;
             WeaponRecoil = 3;
-            camControls.ADSFOV = 33;
+            camControls.ADSFOV = 25;
         }
 
         if (HasSniper)
         {
             WeaponDisplay.text = "Long-Range";
+            WeaponDisplay.color = Color.green;
             WeaponCooldown = 2.5f;
             BaseDamage = 25;
             FalloffRange = 120;
             WeaponRecoil = 7;
-            camControls.ADSFOV = 25;
+            camControls.ADSFOV = 20;
         }
 
         if(CurrentCooldown>WeaponCooldown)
         {
-            Crosshair.color = Color.white;
+            if (HasSMG)
+            {
+                Crosshair.color = Color.yellow;
+            }
+            if (HasSniper)
+            {
+                Crosshair.color = Color.green;
+            }
+            if (HasBasicWeapon)
+            {
+                Crosshair.color = Color.white;
+            }
         }
         else
         {
