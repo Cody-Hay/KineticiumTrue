@@ -577,6 +577,11 @@ MonoBehaviour:
   DamageMultiplier: 0
   DamageReduction: 0
   Orientation: {fileID: 8139842178232614767}
+  MaxSlideTime: 0.75
+  SlideForce: 20
+  PlayerObj: {fileID: 711679383999473414}
+  YScale: 0.5
+  SlideKey: 306
   FootPos: {fileID: 5526694488037613714}
   CheckRadius: 0.7
   WhatIsGround:
