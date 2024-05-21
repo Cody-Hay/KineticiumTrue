@@ -9,13 +9,21 @@ public class LevelTransition : MonoBehaviour
     public bool EnemiesKilled;
     public int EnemyCount;
 
+    public GameObject WarningText;
+    public GameObject BlockingWall;
 
+    private void Start()
+    {
+        WarningText.SetActive(false);
+        BlockingWall.SetActive(true);
+    }
 
     private void Update()
     {
         if(EnemyCount == 0)
         {
             EnemiesKilled = true;
+            BlockingWall.SetActive(false);
         }
         else
         {
@@ -31,7 +39,8 @@ public class LevelTransition : MonoBehaviour
         }
         else
         {
-            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+            print("EVERYBODY MUST DIE");
+             WarningFlash();
         }
         
     }
@@ -39,6 +48,13 @@ public class LevelTransition : MonoBehaviour
     public void EnemyDown()
     {
         EnemyCount--;
+    }
+
+    IEnumerator WarningFlash()
+    {
+        WarningText.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        WarningText.SetActive(false);
     }
 }
 
