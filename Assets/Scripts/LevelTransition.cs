@@ -40,7 +40,7 @@ public class LevelTransition : MonoBehaviour
         else
         {
             print("EVERYBODY MUST DIE");
-             WarningFlash();
+             StartCoroutine(WarningFlash());
         }
         
     }
@@ -53,7 +53,7 @@ public class LevelTransition : MonoBehaviour
     IEnumerator WarningFlash()
     {
         WarningText.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3);
         WarningText.SetActive(false);
     }
 }
