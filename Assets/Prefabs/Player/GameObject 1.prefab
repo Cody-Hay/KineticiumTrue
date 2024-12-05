@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 6179885901975396585}
   - component: {fileID: 7184580988615816690}
   - component: {fileID: 8115805080077010804}
+  - component: {fileID: 4235855250616316736}
   - component: {fileID: 6121355114446725109}
   m_Layer: 0
   m_Name: GameObject 1
@@ -662,12 +663,28 @@ MonoBehaviour:
   WeaponDisplay: {fileID: 0}
   playerMovement: {fileID: 0}
   camControls: {fileID: 516879241589801143}
+  PausePopUp: {fileID: 0}
   GunMesh: {fileID: 1017406934199536057}
   HasBasicWeapon: 0
   HasSMG: 0
   HasSniper: 0
   ASource: {fileID: 0}
   Gunshot: {fileID: 8300000, guid: 21b53734d37ab7f4990310aeb34752a3, type: 3}
+--- !u!114 &4235855250616316736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8395056332575642023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e33deca38e2104aa69eb471cc39590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PauseMenu: {fileID: 5319269574562502292, guid: b092aef617d9f8845b5444f4b10914e0,
+    type: 3}
+  IsPaused: 0
 --- !u!82 &6121355114446725109
 AudioSource:
   m_ObjectHideFlags: 0

@@ -30,6 +30,7 @@ public class PlayerGun : MonoBehaviour
 
     public PlayerMovement playerMovement;
     public CameraControls camControls;
+    public PauseMenuPopup PausePopUp;
     [SerializeField] private MeshRenderer GunMesh;
 
     [Header("Gun Swapping")]
@@ -50,6 +51,7 @@ public class PlayerGun : MonoBehaviour
         CurrentCooldown = WeaponCooldown;
         playerMovement = this.GetComponent<PlayerMovement>();
         ASource= this.GetComponent<AudioSource>();
+        PausePopUp= this.GetComponent<PauseMenuPopup>();
     }
 
     // Update is called once per frame
@@ -61,7 +63,14 @@ public class PlayerGun : MonoBehaviour
         //Inputs
         if (Input.GetMouseButton(0))
         {
-            Shoot();
+            if (PausePopUp.IsPaused == false)
+            {
+               Shoot();
+            }
+            else
+            {
+                return;
+            }
         }
         PlayerDamage = (BaseDamage * playerMovement.DamageMultiplier);
         CurrentCooldown = CurrentCooldown + Time.deltaTime;
