@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
 
         //Speedometer
-        CurrentVelocity = rb.velocity.magnitude;
+        CurrentVelocity = rb.linearVelocity.magnitude;
         roundedVelocity = Mathf.Round(CurrentVelocity);
         Speedometer.text = roundedVelocity.ToString();
         SpeedSlider.value = roundedVelocity / 30;
@@ -119,11 +119,11 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.F))
         {
-            rb.drag = GroundDrag;
+            rb.linearDamping = GroundDrag;
         }
         else
         {
-            rb.drag = 0;
+            rb.linearDamping = 0;
         }
     }
 
@@ -135,23 +135,23 @@ public class PlayerMovement : MonoBehaviour
         if(IsGrounded)
         {
             //rb.AddForce(MoveDirection.normalized * MoveSpeed * 10f, ForceMode.Force);
-            rb.velocity += MoveDirection * (MoveSpeed * 1.5f * Time.deltaTime);
+            rb.linearVelocity += MoveDirection * (MoveSpeed * 1.5f * Time.deltaTime);
         }
         else if(!IsGrounded)
         {
-            rb.velocity += MoveDirection * (MoveSpeed * 1.5f * Time.deltaTime);
+            rb.linearVelocity += MoveDirection * (MoveSpeed * 1.5f * Time.deltaTime);
         }
 
-        rb.velocity = new Vector3(
-            Mathf.Clamp(rb.velocity.x, (-TopXSpeed), TopXSpeed),
-            Mathf.Clamp(rb.velocity.y,  -TopYSpeed, TopYSpeed),
-            Mathf.Clamp(rb.velocity.z, (-TopZSpeed), TopZSpeed));
+        rb.linearVelocity = new Vector3(
+            Mathf.Clamp(rb.linearVelocity.x, (-TopXSpeed), TopXSpeed),
+            Mathf.Clamp(rb.linearVelocity.y,  -TopYSpeed, TopYSpeed),
+            Mathf.Clamp(rb.linearVelocity.z, (-TopZSpeed), TopZSpeed));
     }
 
     //Jump Behaviour
     private void Jump()
     {
-        rb.velocity = new Vector3 (rb.velocity.x, 0f, rb.velocity.z);
+        rb.linearVelocity = new Vector3 (rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
     }

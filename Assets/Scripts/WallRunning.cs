@@ -105,7 +105,7 @@ public class WallRunning : MonoBehaviour
     private void IsWallRunning()
     {
         rb.useGravity = false;
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         Vector3 WallNormal= WallRight ? RightWallHit.normal : LeftWallHit.normal;
 
@@ -119,9 +119,9 @@ public class WallRunning : MonoBehaviour
         rb.AddForce(WallForward * WallRunForce, ForceMode.Force);
 
         if (upwardsRunning)
-            rb.velocity = new Vector3(rb.velocity.x, wallClimbSpeed, rb.velocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, wallClimbSpeed, rb.linearVelocity.z);
         if (downwardsRunning)
-            rb.velocity = new Vector3(rb.velocity.x, -wallClimbSpeed, rb.velocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -wallClimbSpeed, rb.linearVelocity.z);
 
         if (!(WallLeft && HorizontalInput > 0)&& !(WallRight && HorizontalInput < 0))
         {
@@ -152,7 +152,7 @@ public class WallRunning : MonoBehaviour
         Vector3 wallNormal = WallRight ? RightWallHit.normal : LeftWallHit.normal;
         Vector3 forceToApply = transform.up * WallJumpUpForce * 5 + wallNormal * WallJumpSideForce * 5;
 
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(forceToApply, ForceMode.Force);
     }
 
